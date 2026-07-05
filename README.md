@@ -75,7 +75,17 @@ UPDATE users SET role = 'admin', status = 'active' WHERE email = 'your-email@exa
 
 ## Demo
 
-_Screen recording / walkthrough GIF pending — coming soon._
+![Aura SW walkthrough](screenshots/aura-demo.gif)
+
+| Login | Dashboard | Verified profile |
+|---|---|---|
+| ![Login](screenshots/01_login.png) | ![Dashboard](screenshots/02_dashboard.png) | ![Profile](screenshots/03_profile.png) |
+
+| Security / 2FA | Inbox | DM thread |
+|---|---|---|
+| ![Security](screenshots/04_security.png) | ![Messages](screenshots/05_messages.png) | ![DM thread](screenshots/06_dm_thread.png) |
+
+_Screens shown are from a seeded demo account, not real users._
 
 ## License
 
