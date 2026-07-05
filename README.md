@@ -17,9 +17,19 @@ Full-stack social platform with document + biometric identity verification (KYC)
 
 ## Architecture
 
+```mermaid
+graph LR
+  A["React + TypeScript PWA"] -->|"REST /api/v1"| B["FastAPI backend (~27 routers)"]
+  B --> C[("Supabase Postgres\n(Row Level Security)")]
+  B --> D["Supabase Storage\n(signed URLs, watermarking)"]
+  B --> E["MetaMap\n(KYC: document + biometrics)"]
+  B --> F["Stripe\n(checkout + webhooks)"]
+  B --> G["Web Push\n(VAPID)"]
+```
+
 - **~27 REST routers** under `/api/v1`: auth, KYC, admin, payments, feed, messaging, notifications, profiles, discovery, groups, events, reviews, and more.
 - **KYC pipeline**: MetaMap integration (document + biometric verification) with a simulation mode for local dev, master-key-based manual approval flow, and an admin backoffice to review pending users.
-- **Security**: Postgres RLS across all user-facing tables, JWT access/refresh rotation, TOTP 2FA, per-endpoint rate limiting, signed media URLs, ownership checks on every mutation, input validation against injection/traversal/DoS-style edge cases.
+- **Security**: Postgres RLS across all user-facing tables, JWT access/refresh rotation, TOTP 2FA, per-endpoint rate limiting, signed media URLs, ownership checks on every mutation, input validation against injection/traversal/DoS-style edge cases. See [`docs/SECURITY_ENGINEERING.md`](docs/SECURITY_ENGINEERING.md) for specifics.
 - **Real-time-ish social features**: feed with posts/stories/polls, nested comments, reactions, follows, DMs with view-once media and typing indicators, push notifications (Web Push/VAPID).
 - **Media pipeline**: upload → watermark → Supabase Storage, with signed, time-limited URLs (no public media buckets).
 
@@ -62,6 +72,14 @@ npm run dev
 ```sql
 UPDATE users SET role = 'admin', status = 'active' WHERE email = 'your-email@example.com';
 ```
+
+## Demo
+
+_Screen recording / walkthrough GIF pending — coming soon._
+
+## License
+
+All rights reserved — see [`LICENSE`](LICENSE). This is proprietary code shared for portfolio purposes; it's not open source.
 
 ## Notes
 
