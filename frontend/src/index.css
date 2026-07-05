@@ -1,0 +1,322 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Aura SW Design Tokens ───────────────────────────────── */
+:root {
+  /* Neutros */
+  --obsidian:   #020207;
+  --onyx:       #0B0B12;
+  --smoke:      #14141C;
+  --pewter:     #1F1F2A;
+  --ash:        #3A3A45;
+  --mist:       #8A8A95;
+  --silver:     #C7C7CE;
+  --paper:      #F5F1E8;
+  --cream:      #EFE9DA;
+  /* Dorado */
+  --gold-deep:   #8A6B14;
+  --gold:        #C9A227;
+  --gold-bright: #E6C25A;
+  --gold-light:  #FFE566;
+  /* Bordes */
+  --border:       rgba(255,229,102,0.10);
+  --border-soft:  rgba(245,241,232,0.06);
+  /* Semánticos */
+  --bg:           var(--obsidian);
+  --surface:      var(--onyx);
+  --surface-2:    var(--smoke);
+  --fg:           var(--paper);
+  --fg-mute:      var(--mist);
+  --fg-dim:       #5A5A66;
+  --accent:       var(--gold);
+  --accent-hover: var(--gold-bright);
+  --danger:       #C25A5A;
+  /* Tipografía */
+  --font-display:      "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-display-caps: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  --font-sans:         "Manrope", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:         "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* Escala tipográfica */
+  --fs-display-xxl: clamp(64px,11vw,168px);
+  --fs-display-xl:  clamp(48px,7vw,96px);
+  --fs-display-l:   clamp(36px,4.4vw,64px);
+  --fs-display-m:   clamp(28px,3vw,40px);
+  --fs-body-l:      18px;
+  --fs-body:        15px;
+  --fs-eyebrow:     11px;
+  /* Spacing & radius */
+  --gutter:         clamp(20px,4vw,56px);
+  --section-y:      clamp(80px,12vh,160px);
+  --radius-sm:      4px;
+  --radius-md:      8px;
+  --radius-lg:      14px;
+  --radius-pill:    999px;
+  --tracking-eyebrow: 0.22em;
+  --tracking-caps:    0.18em;
+}
+
+/* Utilidades tipográficas de marca */
+.text-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+.text-display-xl {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display-xl);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--paper);
+}
+.text-display-l {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display-l);
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  color: var(--paper);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obsidian); }
+::-webkit-scrollbar-thumb { background: var(--ash); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-deep); }
+
+/* ── Brand typography helpers (usar en toda la app) ─────── */
+
+/* Clase para cualquier título editorial grande */
+.brand-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: var(--paper);
+  line-height: 1.1;
+}
+
+.brand-title-italic {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.015em;
+  color: var(--paper);
+  line-height: 1.1;
+}
+
+/* Eyebrow / kicker — JetBrains Mono */
+.brand-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.brand-eyebrow-muted {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  font-weight: 500;
+}
+
+/* Estado vacío — usado en empty states de toda la app */
+.brand-empty-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: var(--fs-display-m);
+  color: var(--paper);
+  line-height: 1.15;
+}
+
+/* Animación del logo (rotación suave del aura) */
+@keyframes aura-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes aura-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.15; transform: scale(1.12); }
+}
+
+@keyframes aura-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Theme: Default (Dark + Gold AURA) ──────────────────── */
+:root {
+  --bg-base:  4 4 9;
+  --bg-card:  8 8 16;
+  --bg-muted: 14 14 24;
+  --border:   32 28 18;
+  --accent-primary:   201 162 39;
+  --accent-secondary: 255 229 102;
+  --text-primary:   248 244 232;
+  --text-secondary: 180 165 130;
+  --text-muted:     110 100 75;
+  --gradient-brand: linear-gradient(135deg, #C9A227 0%, #FFE566 100%);
+  --gradient-card:  linear-gradient(160deg, rgba(201,162,39,.06) 0%, transparent 60%);
+  --glow-color: rgba(201, 162, 39, 0.18);
+  --scrollbar-track: #040409;
+  --scrollbar-thumb: #2a2208;
+}
+
+/* ─── Theme: Blue ─────────────────────────────────────────── */
+[data-theme="blue"] {
+  --bg-base:  3 9 18;
+  --bg-card:  5 14 28;
+  --bg-muted: 8 22 44;
+  --border:   16 44 84;
+  --accent-primary:   49 130 246;
+  --accent-secondary: 96 165 250;
+  --gradient-brand: linear-gradient(135deg, #3182F6 0%, #60A5FA 100%);
+  --gradient-card:  linear-gradient(160deg, rgba(49,130,246,.06) 0%, transparent 60%);
+  --glow-color: rgba(49, 130, 246, 0.15);
+  --scrollbar-track: #030912;
+  --scrollbar-thumb: #102C54;
+}
+
+/* ─── Theme: Red ──────────────────────────────────────────── */
+[data-theme="red"] {
+  --bg-base:  10 3 5;
+  --bg-card:  18 6 10;
+  --bg-muted: 28 9 15;
+  --border:   60 15 25;
+  --accent-primary:   210 25 50;
+  --accent-secondary: 244 63 94;
+  --gradient-brand: linear-gradient(135deg, #D21932 0%, #F43F5E 100%);
+  --gradient-card:  linear-gradient(160deg, rgba(210,25,50,.06) 0%, transparent 60%);
+  --glow-color: rgba(210, 25, 50, 0.15);
+  --scrollbar-track: #0A0305;
+  --scrollbar-thumb: #3C0F19;
+}
+
+/* ─── Theme: Pure Dark (monochrome) ──────────────────────── */
+[data-theme="pure"] {
+  --bg-base:  6 6 6;
+  --bg-card:  11 11 11;
+  --bg-muted: 18 18 18;
+  --border:   36 36 36;
+  --accent-primary:   210 210 210;
+  --accent-secondary: 150 150 150;
+  --gradient-brand: linear-gradient(135deg, #D2D2D2 0%, #969696 100%);
+  --gradient-card:  linear-gradient(160deg, rgba(210,210,210,.04) 0%, transparent 60%);
+  --glow-color: rgba(210, 210, 210, 0.08);
+  --scrollbar-track: #060606;
+  --scrollbar-thumb: #242424;
+}
+
+/* ─── Theme: Light (Cálido) ───────────────────────────────── */
+[data-theme="light"] {
+  --bg-base:  252 248 240;
+  --bg-card:  255 255 255;
+  --bg-muted: 245 240 228;
+  --border:   200 180 130;
+  --accent-primary:   160 118 20;
+  --accent-secondary: 201 162 39;
+  --text-primary:   20 16 8;
+  --text-secondary: 80 65 35;
+  --text-muted:     140 120 75;
+  --gradient-brand: linear-gradient(135deg, #A07614 0%, #C9A227 100%);
+  --gradient-card:  linear-gradient(160deg, rgba(201,162,39,.06) 0%, transparent 60%);
+  --glow-color: rgba(160, 118, 20, 0.12);
+  --scrollbar-track: #F5EFE0;
+  --scrollbar-thumb: #C9A227;
+}
+
+[data-theme="light"] html,
+html:has([data-theme="light"]) {
+  color-scheme: light;
+}
+
+/* ─── Base ────────────────────────────────────────────────── */
+@layer base {
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html { color-scheme: dark; }
+
+  body {
+    @apply bg-bg-base text-text-primary font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track  { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb  { background: var(--scrollbar-thumb); border-radius: 3px; }
+}
+
+/* ─── AURA Logo Animations ───────────────────────────────── */
+@keyframes aura-spin  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes aura-pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes aura-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* ─── Utilities ───────────────────────────────────────────── */
+@layer utilities {
+  .bg-gradient-card { background: var(--gradient-card); }
+  .shadow-glow      { box-shadow: 0 0 24px var(--glow-color); }
+  .shadow-glow-sm   { box-shadow: 0 0 12px var(--glow-color); }
+  .border-accent    { border-color: rgb(var(--accent-primary) / 0.35); }
+  .min-h-dvh        { min-height: 100dvh; }
+  .h-dvh            { height: 100dvh; }
+
+  /* Skeleton loader — shimmer gradient */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--bg-muted)) 25%,
+      rgb(var(--bg-card) / 0.9) 50%,
+      rgb(var(--bg-muted)) 75%
+    );
+    background-size: 200% auto;
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+
+  /* Card interactive lift */
+  .card-hover {
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  }
+}
+
+/* ─── Safe Area iOS PWA — FUERA de @layer para que Tailwind no las purgue ── */
+/* Estas clases SIEMPRE están en el CSS final, sin importar el content scan.   */
+.pt-safe   { padding-top:    env(safe-area-inset-top,    0px) !important; }
+.pb-safe   { padding-bottom: env(safe-area-inset-bottom, 0px) !important; }
+.pl-safe   { padding-left:   env(safe-area-inset-left,   0px) !important; }
+.pr-safe   { padding-right:  env(safe-area-inset-right,  0px) !important; }
+.mt-safe   { margin-top:     env(safe-area-inset-top,    0px) !important; }
+.mb-safe   { margin-bottom:  env(safe-area-inset-bottom, 0px) !important; }
+
+/* Header: padding-top = 0.75rem + safe area (el contenido nunca queda bajo el notch) */
+.pt-safe-3 { padding-top:    calc(0.75rem + env(safe-area-inset-top,    0px)) !important; }
+.pb-safe-3 { padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px)) !important; }
+
+/* Selector global para TODOS los headers sticky/fixed al tope de la pantalla */
+/* Cubre automáticamente cualquier header que tenga estas clases */
+header.sticky,
+header[class*="sticky"],
+nav.fixed,
+nav[class*="fixed"] {
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+}
